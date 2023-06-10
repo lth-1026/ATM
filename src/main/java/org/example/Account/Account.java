@@ -12,9 +12,9 @@ public class Account implements Banking {
     private Long accountNum;
     private Money balance;
 
-    public Account(Long bankId, Person bankUser, Long accountNum) {
+    public Account(Long bankId, Person person, Long accountNum) {
         this.bankId = bankId;
-        this.person = bankUser;
+        this.person = person;
         this.accountNum = accountNum;
         this.balance = new Money(0);
     }

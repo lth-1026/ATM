@@ -1,11 +1,13 @@
 package org.example.Bank;
 
+import lombok.Getter;
 import org.example.Account.Account;
 import org.example.Person.Person;
 
 import java.util.*;
 
 public class Bank{
+    @Getter
     private Long bankId;
     private String bankName;
     private Map<Long, BankUser> bankUsers;
