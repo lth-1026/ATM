@@ -4,9 +4,9 @@ import org.example.Account.Account;
 import org.example.Money.Money;
 
 public interface Banking {
-    Money getBalance(Account account);
+    Money getBalance();
 
-    void deposit(Account account, Money money);
+    void deposit(Money money);
 
-    Money withdraw(Account account, Integer input);
+    Money withdraw(Integer input);
 }
