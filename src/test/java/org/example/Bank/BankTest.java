@@ -12,7 +12,7 @@ class BankTest {
     @Test
     void openAccount() {
         Long bankUserId = bank.addBankUser(taeho, 1234);
-        Account account = bank.openAccount(bankUserId);
+        Account account = bank.openAccount(bankUserId, 123L);
         assertEquals(bank.getAccounts(bankUserId).stream().findAny().get(), account);
     }
 

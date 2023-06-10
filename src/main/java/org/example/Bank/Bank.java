@@ -2,6 +2,7 @@ package org.example.Bank;
 
 import lombok.Getter;
 import org.example.Account.Account;
+import org.example.Card.Card;
 import org.example.Person.Person;
 
 import java.util.*;
@@ -18,9 +19,9 @@ public class Bank{
         this.bankUsers = new HashMap<>();
     }
 
-    public Account openAccount(Long bankUserId) {
+    public Account openAccount(Long bankUserId, Long accountNum) {
         BankUser bankUser = getBankUser(bankUserId);
-        Account account = new Account(bankId, bankUser.getPerson(), 25L);
+        Account account = new Account(bankId, bankUser.getPerson(), accountNum);
         bankUser.getAccounts().add(account);
         return account;
     }
@@ -35,6 +36,10 @@ public class Bank{
     public boolean isCorrectPin(Long bankUserId, Integer pin) {
         BankUser bankUser = bankUsers.get(bankUserId);
         return Objects.equals(bankUser.getPin(), pin);
+    }
+
+    public Card issueCard(Long bankUserId) {
+        return new Card(bankId, bankUserId);
     }
 
     public List<Account> getAccounts(Long bankUserId) {
