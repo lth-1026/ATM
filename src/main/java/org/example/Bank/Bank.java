@@ -1,14 +1,11 @@
 package org.example.Bank;
 
-import lombok.Getter;
 import org.example.Account.Account;
-import org.example.Money.Money;
 import org.example.Person.Person;
 
 import java.util.*;
 
-@Getter
-public class Bank implements Banking{
+public class Bank{
     private Long bankId;
     private String bankName;
     private Map<Long, BankUser> bankUsers;
@@ -19,16 +16,18 @@ public class Bank implements Banking{
         this.bankUsers = new HashMap<>();
     }
 
-    public void openAccount(BankUser bankUser) {
-        Account account = new Account(bankId, bankUser, 25L);
+    public Account openAccount(Long bankUserId) {
+        BankUser bankUser = getBankUser(bankUserId);
+        Account account = new Account(bankId, bankUser.getPerson(), 25L);
         bankUser.getAccounts().add(account);
+        return account;
     }
-    public BankUser addBankUser(Person person, Integer pin) {
+    public Long addBankUser(Person person, Integer pin) {
         Long newUserId = getBankUserCount() + 1;
         BankUser bankUser = new BankUser(newUserId, person, pin);
         bankUsers.put(newUserId, bankUser);
 
-        return bankUser;
+        return bankUser.getBankUserId();
     }
 
     public boolean isCorrectPin(Long bankUserId, Integer pin) {
@@ -36,24 +35,14 @@ public class Bank implements Banking{
         return Objects.equals(bankUser.getPin(), pin);
     }
 
+    public List<Account> getAccounts(Long bankUserId) {
+        return bankUsers.get(bankUserId).getAccounts();
+    }
 
-
+    private BankUser getBankUser(Long bankUserId) {
+        return bankUsers.get(bankUserId);
+    }
     private Long getBankUserCount() {
         return (long) bankUsers.size();
-    }
-
-    @Override
-    public Money getBalance(Account account) {
-        return null;
-    }
-
-    @Override
-    public void deposit(Account account, Money money) {
-
-    }
-
-    @Override
-    public Money withdraw(Account account, Integer input) {
-        return null;
     }
 }

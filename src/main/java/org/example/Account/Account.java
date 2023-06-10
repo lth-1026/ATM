@@ -3,16 +3,18 @@ package org.example.Account;
 import lombok.Getter;
 import org.example.Bank.Banking;
 import org.example.Money.Money;
+import org.example.Person.Person;
+
 @Getter
 public class Account implements Banking {
     private Long bankId;
-    private BankUser bankUser;
+    private Person person;
     private Long accountNum;
     private Money balance;
 
     public Account(Long bankId, Person bankUser, Long accountNum) {
         this.bankId = bankId;
-        this.bankUser = bankUser;
+        this.person = bankUser;
         this.accountNum = accountNum;
         this.balance = new Money(0);
     }

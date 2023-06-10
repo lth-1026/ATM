@@ -1,5 +1,6 @@
 package org.example.Bank;
 
+import org.example.Account.Account;
 import org.example.Person.Person;
 import org.junit.jupiter.api.Test;
 
@@ -10,14 +11,14 @@ class BankTest {
     private static Person taeho = new Person("TaeHo Lee", "man");
     @Test
     void openAccount() {
-        BankUser bankUser = bank.addBankUser(taeho, 1234);
-        bank.openAccount(bankUser);
-        assertEquals(bankUser.getAccounts().stream().findAny().get().getBankUser(), bankUser);
+        Long bankUserId = bank.addBankUser(taeho, 1234);
+        Account account = bank.openAccount(bankUserId);
+        assertEquals(bank.getAccounts(bankUserId).stream().findAny().get(), account);
     }
 
     @Test
     void addBankUser() {
-        BankUser bankUser = bank.addBankUser(taeho, 1234);
-        assertEquals(bankUser.getPerson(), taeho);
+        Long bankUserId = bank.addBankUser(taeho, 1234);
+        assertTrue(bank.isCorrectPin(bankUserId, 1234));
     }
 }
